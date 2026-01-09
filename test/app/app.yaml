@@ -4,8 +4,9 @@ metadata:
   name: test
   namespace: test-argo
   annotations:
-    notifications.argoproj.io/subscribe.on-sync-succeeded.email: rajesh.sangepu@opsmx.io
-    notifications.argoproj.io/subscribe.on-sync-failed.email: rajesh.sangepu@opsmx.io
+    notifications.argoproj.io/subscribe.on-sync-succeeded.my_server: rajesh.sangepu@opsmx.io
+    notifications.argoproj.io/subscribe.on-sync-failed.my_server: rajesh.sangepu@opsmx.io
+    notifications.argoproj.io/subscribe.on-health-degraded.my_server: rajesh.sangepu@opsmx.io
 spec:
   project: default
   source:
