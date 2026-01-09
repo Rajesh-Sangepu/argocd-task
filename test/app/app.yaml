@@ -3,17 +3,23 @@ kind: Application
 metadata:
   name: test
   namespace: test-argo
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
   annotations:
     notifications.argoproj.io/subscribe.on-sync-succeeded.my_server: rajesh.sangepu@opsmx.io
     notifications.argoproj.io/subscribe.on-sync-failed.my_server: rajesh.sangepu@opsmx.io
-    notifications.argoproj.io/subscribe.on-health-degraded.my_server: rajesh.sangepu@opsmx.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/Rajesh-Sangepu/argocd-task.git
-    targetRevision: HEAD
-    path: test/k8
+    repoURL: 'https://github.com/Rajesh-Sangepu.git'
+    path: test/k8s
+    targetRevision: master
   destination:
-    server: https://kubernetes.default.svc
-    namespace: default
-
+    server: 'https://kubernetes.default.svc'
+    namespace: test-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
