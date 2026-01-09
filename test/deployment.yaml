@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  notifications.argoproj.io/subscribe.on-sync-succeeded.email: rajesh.sangepu@opsmx.io
+  notifications.argoproj.io/subscribe.on-sync-failed.email: rajesh.sangepu@opsmx.io
   name: my-app
   namespace: test-argo
   labels:
