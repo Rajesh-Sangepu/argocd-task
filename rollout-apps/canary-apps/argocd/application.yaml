@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/Rajesh-Sangepu/argocd-task.git
     targetRevision: main
-    path: k8s
+    path: rollout-apps/canary-apps/k8s
 
   destination:
     server: https://kubernetes.default.svc
