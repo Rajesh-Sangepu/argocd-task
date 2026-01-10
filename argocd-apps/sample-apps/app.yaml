@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/Rajesh-Sangepu/argocd-task.git
     targetRevision: HEAD
-    path: argocd-apps/k8s         # Path inside the repo
+    path: argocd-apps/sample-apps/k8s         # Path inside the repo
 
   destination:
     server: https://kubernetes.default.svc
