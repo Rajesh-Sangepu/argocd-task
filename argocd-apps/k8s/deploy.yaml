@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: my-app
-          image: nginx:1.25
+          image: skfsh1.25
           ports:
-            - containerPort: 80w
+            - containerPort: 80
