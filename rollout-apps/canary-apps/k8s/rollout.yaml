@@ -28,6 +28,6 @@ spec:
     spec:
       containers:
         - name: my-app
-          image: nginx:latest
+          image: nginx:1.25
           ports:
             - containerPort: 80
