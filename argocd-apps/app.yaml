@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: sample-app
-  namespace: argocd          # Argo CD namespace (change if different)
+  namespace: test-argo          # Argo CD namespace (change if different)
 spec:
   project: default
 
   source:
     repoURL: https://github.com/Rajesh-Sangepu/argocd-task.git
     targetRevision: HEAD
-    path: test         # Path inside the repo
+    path: argocd-apps/k8s         # Path inside the repo
 
   destination:
     server: https://kubernetes.default.svc
