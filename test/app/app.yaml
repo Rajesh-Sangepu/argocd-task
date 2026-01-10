@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: test
-  namespace: test-argo
+  namespace: my-argo
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:
@@ -11,7 +11,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/Rajesh-Sangepu.git'
+    repoURL: 'https://github.com/Rajesh-Sangepu/argocd-task.git'
     path: test/k8s
     targetRevision: master
   destination:
