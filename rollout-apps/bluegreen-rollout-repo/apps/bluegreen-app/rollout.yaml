@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: bluegreen-rollout
-  namespace: my-app
+  namespace: test-argo
 spec:
   replicas: 3
   revisionHistoryLimit: 2
