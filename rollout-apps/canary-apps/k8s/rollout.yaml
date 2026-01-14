@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: my-app
-  namespace: my-argo
+  namespace: test-argo
   annotations:
     notifications.argoproj.io/subscribe.on-rollout-progressing.slack: ssd-deployments
     notifications.argoproj.io/subscribe.on-rollout-healthy.slack: ssd-deployments
