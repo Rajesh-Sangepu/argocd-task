@@ -7,14 +7,14 @@ spec:
   metrics:
   - name: fast-health-check
     interval: 5s
-    count: 2            # try twice
-    failureLimit: 1     # allow one failure
+    count: 2
+    failureLimit: 1
     successCondition: result == 0
     failureCondition: result != 0
     provider:
       job:
         spec:
-          activeDeadlineSeconds: 10
+          activeDeadlineSeconds: 15
           backoffLimit: 0
           template:
             spec:
