@@ -31,6 +31,7 @@ spec:
             port: 80
           initialDelaySeconds: 2
           periodSeconds: 2
+          failureThreshold: 3
 
   strategy:
     canary:
@@ -42,15 +43,12 @@ spec:
       - analysis:
           templates:
           - templateName: canary-smoke-test
-
       - setWeight: 50
       - analysis:
           templates:
           - templateName: canary-smoke-test
-
       - setWeight: 75
       - analysis:
           templates:
           - templateName: canary-smoke-test
-
       - setWeight: 100
