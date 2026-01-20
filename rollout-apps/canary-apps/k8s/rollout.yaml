@@ -2,14 +2,25 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: my-app
-  namespace: test-argo
+  namespace: my-argo
   annotations:
     notifications.argoproj.io/subscribe.on-rollout-progressing.slack: ssd-deployments
     notifications.argoproj.io/subscribe.on-rollout-healthy.slack: ssd-deployments
     notifications.argoproj.io/subscribe.on-rollout-degraded.slack: ssd-deployments
-    notifications.argoproj.io/subscribe.on-rollout-degraded.email: rajesh.sangepu@opsmx.io
+    notifications.argoproj.io/subscribe.on-rollout-degraded.email: rajesh.sangepu@opsmx.io  
 spec:
   replicas: 4
+
+  strategy:
+    canary:
+      steps:
+        - setWeight: 25
+        - pause: { duration: 30 }
+        - setWeight: 50
+        - pause: { duration: 30 }
+        - setWeight: 75
+        - pause: { duration: 30 }
+        - setWeight: 100
 
   selector:
     matchLabels:
@@ -21,34 +32,7 @@ spec:
         app: my-app
     spec:
       containers:
-      - name: my-app
-        image: nginx:latestw
-        ports:
-        - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 2
-          periodSeconds: 2
-          failureThreshold: 3
-
-  strategy:
-    canary:
-      canaryService: my-app-canary
-      stableService: my-app-stable
-
-      steps:
-      - setWeight: 25
-      - analysis:
-          templates:
-          - templateName: canary-smoke-test
-      - setWeight: 50
-      - analysis:
-          templates:
-          - templateName: canary-smoke-test
-      - setWeight: 75
-      - analysis:
-          templates:
-          - templateName: canary-smoke-test
-      - setWeight: 100
+        - name: my-app
+          image: nginx:1.25
+          ports:
+            - containerPort: 80
