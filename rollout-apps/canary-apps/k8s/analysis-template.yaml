@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: canary-smoke-test
+  namespace: test-argo
+spec:
+  metrics:
+  - name: nginx-health
+    provider:
+      job:
+        spec:
+          backoffLimit: 0
+          template:
+            spec:
+              restartPolicy: Never
+              containers:
+              - name: smoke-test
+                image: curlimages/curl
+                command:
+                - sh
+                - -c
+                - |
+                  set -e
+                  echo "Checking canary service..."
+                  curl -f http://my-app-canary.test-argo.svc.cluster.local
