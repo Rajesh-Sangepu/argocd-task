@@ -5,16 +5,13 @@ metadata:
   namespace: test-argo
 spec:
   project: default
-
   source:
     repoURL: https://github.com/Rajesh-Sangepu/argocd-task.git
     targetRevision: main
     path: rollout-apps/canary-apps/k8s
-
   destination:
     server: https://kubernetes.default.svc
     namespace: test-argo
-
   syncPolicy:
     automated:
       prune: true
