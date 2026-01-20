@@ -11,15 +11,6 @@ metadata:
 spec:
   replicas: 3
 
-  strategy:
-    canary:
-      steps:
-        - setWeight: 25
-        - pause: { duration: 30 }
-        - setWeight: 50
-        - pause: { duration: 30 }
-        - setWeight: 100
-
   selector:
     matchLabels:
       app: my-app
@@ -31,6 +22,22 @@ spec:
     spec:
       containers:
         - name: my-app
-          image: nginx:latest
+          image: nginx:1.25.3       # ✅ use a specific tag instead of 'latest'
           ports:
             - containerPort: 80
+          readinessProbe:             # ✅ ensures pod is ready before traffic
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 2
+            failureThreshold: 3
+
+  strategy:
+    canary:
+      steps:
+        - setWeight: 25
+        - pause: { duration: 30 }
+        - setWeight: 50
+        - pause: { duration: 30 }
+        - setWeight: 100
