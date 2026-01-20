@@ -2,10 +2,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
   name: canary-smoke-test
-  namespace: test-argo
+  namespace: test-argo   # ✅ REQUIRED
 spec:
   metrics:
-  - name: fast-health-check
+  - name: nginx-health
     interval: 5s
     count: 1
     successCondition: result == 0
