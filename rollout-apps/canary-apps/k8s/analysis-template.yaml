@@ -5,11 +5,16 @@ metadata:
   namespace: test-argo
 spec:
   metrics:
-  - name: nginx-health
+  - name: fast-health-check
+    interval: 5s
+    count: 1            # ✅ run only once
+    successCondition: result == 0
+    failureCondition: result != 0
     provider:
       job:
         spec:
-          backoffLimit: 0
+          activeDeadlineSeconds: 10   # ✅ hard timeout
+          backoffLimit: 0             # ✅ no retries
           template:
             spec:
               restartPolicy: Never
@@ -21,5 +26,4 @@ spec:
                 - -c
                 - |
                   set -e
-                  echo "Checking canary service..."
-                  curl -f http://my-app-canary.test-argo.svc.cluster.local
+                  curl -f --max-time 5 http://my-app-canary.test-argo.svc.cluster.local
