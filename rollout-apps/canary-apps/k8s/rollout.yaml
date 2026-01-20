@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: nginx:1.25.3
+        image: nginx:latest
         ports:
         - containerPort: 80
         readinessProbe:
