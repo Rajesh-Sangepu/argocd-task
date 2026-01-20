@@ -22,16 +22,15 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: nginx:1.25.3        # ✅ valid image
+        image: nginx:1.25.3
         ports:
         - containerPort: 80
-        readinessProbe:            # ✅ faster readiness
+        readinessProbe:
           httpGet:
             path: /
             port: 80
           initialDelaySeconds: 2
           periodSeconds: 2
-          failureThreshold: 3
 
   strategy:
     canary:
@@ -39,9 +38,19 @@ spec:
       stableService: my-app-stable
 
       steps:
-      - setWeight: 30             # ✅ quick canary exposure
+      - setWeight: 25
       - analysis:
           templates:
           - templateName: canary-smoke-test
 
-      - setWeight: 100            # ✅ auto-promote if analysis passes
+      - setWeight: 50
+      - analysis:
+          templates:
+          - templateName: canary-smoke-test
+
+      - setWeight: 75
+      - analysis:
+          templates:
+          - templateName: canary-smoke-test
+
+      - setWeight: 100
