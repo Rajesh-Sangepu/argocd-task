@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-app
-  namespace: my-argo
+  namespace: test-argo
   labels:
     app: my-app
 spec:
