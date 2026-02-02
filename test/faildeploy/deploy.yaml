@@ -1,15 +1,19 @@
-apiVersion: v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: my-app-svc
-  namespace: test-argo
-  labels:
-    app: my-app
+  name: fail-fast-app
+  namespace: fail-test
 spec:
+  replicas: 1
   selector:
-    app: my-app
-  ports:
-    - protocol: TCP
-      port: 80        # Service port
-      targetPort: 80  # Container port
-  type: ClusterIP     # Change to NodePort or LoadBalancer if needed
+    matchLabels:
+      app: fail-fast
+  template:
+    metadata:
+      labels:
+        app: fail-fast
+    spec:
+      containers:
+      - name: app
+        image: busybox
+        command: ["sh", "-c", "exit 1"]
