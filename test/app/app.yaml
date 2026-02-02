@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: 'https://github.com/Rajesh-Sangepu/argocd-task.git'
     path: test/faildeploy
-    targetRevision: Head
+    targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: test-app
