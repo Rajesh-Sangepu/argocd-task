@@ -1,1 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: degraded-app
+  namespace: degrade-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: degraded
+  template:
+    metadata:
+      labels:
+        app: degraded
+    spec:
+      containers:
+      - name: app
+        image: busybox
+        command: ["sh", "-c", "exit 1"]
 
